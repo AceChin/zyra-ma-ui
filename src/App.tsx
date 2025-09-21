@@ -99,7 +99,7 @@ function PendingMa({ maconfig, queryRecodes }: { maconfig: MaConfig, queryRecode
     initialData: [],
     enabled: Boolean(address),
     queryFn: async () => {
-      const res = await fetch('https://desk.bitcoinzyra.io/api/v1/open/contract/pending', { method: 'GET', headers: { "X-Address": address! } })
+      const res = await fetch('https://desk.bitcoinzk.ai/api/v1/open/contract/pending', { method: 'GET', headers: { "X-Address": address! } })
       const data: { code: number, message: string, data: { address: Address, miningMachineSN: string, startDate: `${number}`, dueDate: `${number}`, amount: `${number}` }[] } = await res.json()
       return data.data.map(item => ({ user: item.address, sn: item.miningMachineSN, amount: parseUnits(item.amount, maconfig.assetDecimals), startDate: item.startDate, dueDate: item.dueDate } as ItemData))
     }
