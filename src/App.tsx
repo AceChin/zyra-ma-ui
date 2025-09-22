@@ -62,7 +62,7 @@ type ItemData = {
 //   { user: zeroAddress, sn: '2352q45', amount: 1249000000000000000n, startDate: '1757433600', dueDate: '1757433600' },
 //   { user: zeroAddress, sn: '2352q45', amount: 1249000000000000000n, startDate: '1757433600', dueDate: '1757433600' },
 // ]
-const MaxSelect = 10;
+const MaxSelect = 20;
 
 function useAllRecodes(maconfig: MaConfig) {
   return useQuery({
@@ -184,10 +184,10 @@ function PendingMa({ maconfig, queryRecodes }: { maconfig: MaConfig, queryRecode
           </div>)
       }
     </div>
-    <div className='flex overflow-auto h-[600px]'>
+    <div className='flex overflow-auto'>
       <STable
         refBody={refBody}
-        header={['Address', 'Mining machine SN', 'Zyra amount', 'Start Date', 'Due Date', '']}
+        header={['地址', '矿机SN编码', 'Zyra数量', '开始时间', '结束时间', '']}
         rowClassName={(i) => selected.includes(data[i]) ? 'bg-primary/20' : ''}
         onClickRow={(i) => changeChecked(data[i], !selected.includes(data[i]))}
         data={fData.map((item) => [
@@ -267,9 +267,9 @@ function MaturityMa({ maconfig, queryRecodes }: { maconfig: MaConfig, queryRecod
           </div>)
       }
     </div>
-    <div className='flex overflow-auto h-[600px]'>
+    <div className='flex overflow-auto'>
       <STable
-        header={['Address', 'Mining machine SN', 'Zyra amount', 'Start Date', 'Due Date', '']}
+        header={['地址', '矿机SN编码', 'Zyra数量', '开始时间', '结束时间', '']}
         rowClassName={(i) => selected.includes(data[i]) ? 'bg-primary/20' : ''}
         onClickRow={(i) => changeChecked(data[i], !selected.includes(data[i]))}
         data={data.map((item) => [
@@ -288,7 +288,7 @@ function MaturityMa({ maconfig, queryRecodes }: { maconfig: MaConfig, queryRecod
 
     <div className='flex justify-between'>
       <div>Total: </div>
-      <Button disabled={queryRecodes.isFetching} onClick={() => queryRecodes.refetch()}>{queryRecodes.isFetching && <Loader2Icon className="animate-spin" />} Refresh</Button>
+      <Button disabled={queryRecodes.isFetching} onClick={() => queryRecodes.refetch()}>{queryRecodes.isFetching && <Loader2Icon className="animate-spin" />} 刷新</Button>
       <Txs tx='UnStake' disabled={selected.length <= 0 || !address} txs={getTxs}
         onTxSuccess={() => {
           setSelectedGroup(undefined)
@@ -321,8 +321,8 @@ function App() {
           <ConfigChainsProvider chains={[config.chain]}>
             <Tabs defaultValue='Pending'>
               <TabsList>
-                <TabsTrigger value="Pending">Pending</TabsTrigger>
-                <TabsTrigger value="Maturity">Maturity</TabsTrigger>
+                <TabsTrigger value="Pending">封装中</TabsTrigger>
+                <TabsTrigger value="Maturity">待赎回</TabsTrigger>
               </TabsList>
               <TabsContent value='Pending'>
                 <PendingMa maconfig={config} queryRecodes={queryRecodes} />
