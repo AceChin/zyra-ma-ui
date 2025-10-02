@@ -204,7 +204,7 @@ function PendingMa({ maconfig, queryRecodes }: { maconfig: MaConfig, queryRecode
       />
     </div>
     <div className='flex justify-between'>
-      <div>Total: {formatUnits(total, maconfig.assetDecimals)}</div>
+      <div>总数: {formatUnits(total, maconfig.assetDecimals)} &nbsp; 选中: {selected.length}</div>
       <Txs tx='Stake' disabled={selected.length <= 0 || !address} txs={getTxs}
         onTxSuccess={() => {
           setSelectedGroup(undefined)
